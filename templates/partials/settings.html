@@ -1,0 +1,56 @@
+<div class="space-y-8 max-w-4xl mx-auto">
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">API &amp; Endpoints</h2>
+            <div class="form-control">
+                <label class="label"><span class="label-text">PLC Directory URL</span></label>
+                <input type="text" value="{{ settings.plc_directory_url }}" class="input input-bordered" />
+            </div>
+            <div class="form-control">
+                <label class="label"><span class="label-text">Bluesky PDS URL</span></label>
+                <input type="text" value="{{ settings.bluesky_pds_url }}" class="input input-bordered" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Data Storage</h2>
+            <div class="form-control">
+                <label class="label"><span class="label-text">Storage Type</span></label>
+                <select class="select select-bordered">
+                    <option {% if settings.storage_type == "PostgreSQL" %}selected{% endif %}>PostgreSQL</option>
+                    <option {% if settings.storage_type == "SQLite" %}selected{% endif %}>SQLite</option>
+                    <option {% if settings.storage_type == "Amazon S3" %}selected{% endif %}>Amazon S3</option>
+                </select>
+            </div>
+            <div class="form-control">
+                <label class="label"><span class="label-text">SQLite Database Path</span></label>
+                <input type="text" value="{{ settings.sqlite_db_path }}" class="input input-bordered" />
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Notifications</h2>
+            <p class="text-sm opacity-70">Get notified about scraper job status.</p>
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                    <span class="label-text">Enable Email Notifications</span>
+                    <input type="checkbox" class="toggle toggle-primary" {% if settings.enable_email_notifications %}checked{% endif %} />
+                </label>
+            </div>
+            <div class="form-control">
+                <label class="label"><span class="label-text">Notification Email Address</span></label>
+                <input type="email" placeholder="admin@example.com" value="{{ settings.notification_email_address.as_ref().unwrap_or(&"".to_string()) }}" class="input input-bordered" />
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-end mt-8">
+        <button class="btn btn-primary btn-wide">Save Settings</button>
+    </div>
+
+</div>
